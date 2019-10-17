@@ -1,6 +1,6 @@
 {
   "name": "summon-files",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "nodejs cli application to autogenerate boilerplate files (configurable)",
   "main": "index.ts",
   "bin": {
