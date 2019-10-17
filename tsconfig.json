@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+      "module": "commonJS",
+      "lib": [
+        "es5"
+      ],
+      "outDir": "./dist",
+      "removeComments": true,
+      "typeRoots": ["node_modules/@types", "src/types.ts"],
+      "declaration": true,
+  },
+  "include": [
+    "index.ts",
+    "src/**/*.ts"
+  ]
+}
