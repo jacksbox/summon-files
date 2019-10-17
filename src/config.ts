@@ -1,8 +1,10 @@
 const fs = require('fs')
 
+const { OPTIONS_DIR } = require('./consts')
+
 import { OptionsType, ConfigType } from './types'
 
-const BASE_CONFIG_PATH: string = `${process.cwd()}/.summon/options.json`
+const BASE_CONFIG_PATH: string = `${process.cwd()}${OPTIONS_DIR}/options.json`
 
 const loadOptions = (): OptionsType => {
   let options = null

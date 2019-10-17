@@ -1,4 +1,6 @@
-const USAGE_OUTPUT =
+const OPTIONS_DIR: string = '/.summon'
+
+const USAGE_OUTPUT: string =
 `usage: yarn summon <type> <name> [-s <subType>] [-l] [-i] [-f]
 
 type \t genarator type
@@ -18,5 +20,6 @@ name \t will be used as file / component / class / etc. name
 `
 
 export = {
+  OPTIONS_DIR,
   USAGE_OUTPUT
 }

@@ -2,6 +2,8 @@ const fs = require('fs')
 const handlebars = require('handlebars')
 const mkdirp = require('mkdirp');
 
+const { OPTIONS_DIR } = require('./consts')
+
 const {
   lc,
   uc,
@@ -112,7 +114,7 @@ class Generator implements GeneratorType{
   }
 
   loadTemplate(filename: string): string {
-    const path: string = `${process.cwd()}/.summon/templates/${filename}`;
+    const path: string = `${process.cwd()}${OPTIONS_DIR}/templates/${filename}`;
     let source: string = null
     try {
       source = fs.readFileSync(path, 'utf-8')
