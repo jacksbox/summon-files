@@ -107,6 +107,3 @@ public
 
 # macos
 .DS_Store
-
-# dist folder
-dist
