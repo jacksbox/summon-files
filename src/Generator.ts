@@ -1,8 +1,11 @@
 const fs = require('fs')
 const handlebars = require('handlebars')
+const helpers = require('handlebars-helpers')
 const mkdirp = require('mkdirp');
 
 const { OPTIONS_DIR } = require('./consts')
+
+helpers()
 
 const {
   lc,
@@ -108,7 +111,9 @@ class Generator implements GeneratorType{
       name_lcFirst: lcFirst(this.name),
       name_ucFirst: ucFirst(this.name),
       path: this.getFilePath(),
+      type: this.type,
       subType: this.subType,
+      tags: this.tags,
       ...this.vars
     }
   }
