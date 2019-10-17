@@ -1,0 +1,39 @@
+{
+  "root": "app",
+  "types": [
+    {
+      "type": "component",
+      "desc": "A demo entry to create a react component",
+      "src": "client/components",
+      "defaultTags": ["index", "style"],
+      "defaultVars": {
+        "demoCutomVariable": "someValue"
+      },
+      "files": [
+        {
+          "tag": "index",
+          "template": "index.js.tpl",
+          "target": "{{path}}/index.js"
+        }, {
+          "tag": "style",
+          "template": "style.css.tpl",
+          "target": "{{path}}/{{name}}.css"
+        }
+      ]
+    },
+    {
+      "type": "controller",
+      "desc": "A demo entry to create a koa controller",
+      "src": "server/controller",
+      "defaultTags": ["index"],
+      "defaultVars": {},
+      "files": [
+        {
+          "tag": "index",
+          "template": "controller.js.tpl",
+          "target": "{{path}}/index.js"
+        }
+      ]
+    }
+  ]
+}
