@@ -9,6 +9,10 @@
       "defaultVars": {
         "demoCutomVariable": "someValue"
       },
+      "subTypes": [
+        ["component", "components"],
+        ["class", "classComponent"]
+      ],
       "files": [
         {
           "tag": "index",
