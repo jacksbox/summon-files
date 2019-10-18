@@ -17,11 +17,11 @@
         {
           "tag": "index",
           "template": "index.js.tpl",
-          "target": "{{path}}/index.js"
+          "target": "{{path}}{{name}}/index.js"
         }, {
           "tag": "style",
           "template": "style.css.tpl",
-          "target": "{{path}}/{{name}}.css"
+          "target": "{{path}}{{name}}/{{name}}.css"
         }
       ]
     },
@@ -35,7 +35,7 @@
         {
           "tag": "index",
           "template": "controller.js.tpl",
-          "target": "{{path}}/index.js"
+          "target": "{{path}}{{name}}/index.js"
         }
       ]
     }

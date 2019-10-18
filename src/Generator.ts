@@ -113,7 +113,7 @@ class Generator implements GeneratorType{
   }
 
   getPath(): string {
-    return `${this.getSrc()}${this.name}`
+    return `${this.getSrc()}`
   }
 
   getFilePath(): string {

@@ -84,7 +84,7 @@ var Generator = (function () {
         return this.src ? this.src + "/" : '';
     };
     Generator.prototype.getPath = function () {
-        return "" + this.getSrc() + this.name;
+        return "" + this.getSrc();
     };
     Generator.prototype.getFilePath = function () {
         return "/" + this.getRoot() + this.getPath();
