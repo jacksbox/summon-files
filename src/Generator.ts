@@ -45,7 +45,7 @@ class Generator implements GeneratorType{
   vars: any = {}
 
   subType: string = null
-  subTypeMap: string[][]
+  subTypeMap: any[]
   availableSubTypes: string[]
 
   constructor(command: CommandType, config: ConfigType) {
@@ -63,7 +63,12 @@ class Generator implements GeneratorType{
     this.vars = config.vars
 
     this.subTypeMap = config.subTypes
-    this.availableSubTypes = config.subTypes.map(list => list[0])
+    this.availableSubTypes = config.subTypes.map(types => {
+      if (Array.isArray(types)) {
+        return types[0]
+      }
+      return types
+    })
     this.subType = this.parseSubType(command.args.subType)
   }
 
@@ -73,7 +78,18 @@ class Generator implements GeneratorType{
     }
 
     try {
-      const subType = this.subTypeMap.find(type => type.includes(s))[0]
+      let subType = null
+      this.subTypeMap.forEach(types  => {
+        console.log(types)
+        if (Array.isArray(types) && types.includes(s)) {
+          subType = types[0]
+          return
+        } else if (types === s) {
+          subType = types
+          return
+        }
+      })
+      console.log(subType)
       return subType
     } catch(err) {
       throw new Error(`-s must be one of ${this.availableSubTypes.join('|')} instead got ${s}`)

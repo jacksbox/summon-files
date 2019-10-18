@@ -39,7 +39,12 @@ var Generator = (function () {
         this.tags = config.tags;
         this.vars = config.vars;
         this.subTypeMap = config.subTypes;
-        this.availableSubTypes = config.subTypes.map(function (list) { return list[0]; });
+        this.availableSubTypes = config.subTypes.map(function (types) {
+            if (Array.isArray(types)) {
+                return types[0];
+            }
+            return types;
+        });
         this.subType = this.parseSubType(command.args.subType);
     }
     Generator.prototype.parseSubType = function (s) {
@@ -47,8 +52,20 @@ var Generator = (function () {
             return null;
         }
         try {
-            var subType = this.subTypeMap.find(function (type) { return type.includes(s); })[0];
-            return subType;
+            var subType_1 = null;
+            this.subTypeMap.forEach(function (types) {
+                console.log(types);
+                if (Array.isArray(types) && types.includes(s)) {
+                    subType_1 = types[0];
+                    return;
+                }
+                else if (types === s) {
+                    subType_1 = types;
+                    return;
+                }
+            });
+            console.log(subType_1);
+            return subType_1;
         }
         catch (err) {
             throw new Error("-s must be one of " + this.availableSubTypes.join('|') + " instead got " + s);

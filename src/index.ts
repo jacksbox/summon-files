@@ -14,7 +14,12 @@ import {
 const listGenerators = options =>
 `Available generator Types [available subTypes]:
 ${options.types.map(t => {
-  const subTypesStr = t.subTypes ? `\n    [${t.subTypes.map(t => t[0]).join('|')}]` : ''
+  const subTypesStr = t.subTypes ? `\n    [${t.subTypes.map(t => {
+    if(Array.isArray(t)) {
+      return t[0]
+    }
+    return t
+  }).join('|')}]` : ''
   return `  ${t.type}${subTypesStr}`
 }).join('\n')}
 `

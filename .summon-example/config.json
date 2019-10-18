@@ -11,7 +11,7 @@
       },
       "subTypes": [
         ["component", "components"],
-        ["class", "classComponent"]
+        "class"
       ],
       "files": [
         {

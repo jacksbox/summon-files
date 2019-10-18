@@ -5,7 +5,12 @@ var Generator = require('./Generator');
 var USAGE_OUTPUT = require('./consts').USAGE_OUTPUT;
 var listGenerators = function (options) {
     return "Available generator Types [available subTypes]:\n" + options.types.map(function (t) {
-        var subTypesStr = t.subTypes ? "\n    [" + t.subTypes.map(function (t) { return t[0]; }).join('|') + "]" : '';
+        var subTypesStr = t.subTypes ? "\n    [" + t.subTypes.map(function (t) {
+            if (Array.isArray(t)) {
+                return t[0];
+            }
+            return t;
+        }).join('|') + "]" : '';
         return "  " + t.type + subTypesStr;
     }).join('\n') + "\n";
 };

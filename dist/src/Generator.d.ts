@@ -11,7 +11,7 @@ declare class Generator implements GeneratorType {
     tags: string[];
     vars: any;
     subType: string;
-    subTypeMap: string[][];
+    subTypeMap: any[];
     availableSubTypes: string[];
     constructor(command: CommandType, config: ConfigType);
     parseSubType(s: string): string;

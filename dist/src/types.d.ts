@@ -16,7 +16,7 @@ export interface TypeType {
     src?: string;
     defaultTags?: string[];
     defaultVars?: {};
-    subTypes?: string[][];
+    subTypes?: any[];
     files: any[];
 }
 export interface OptionsType {
@@ -30,7 +30,7 @@ export interface ConfigType {
     type: string;
     desc: string;
     src: string;
-    subTypes: string[][];
+    subTypes: any[];
     files: any[];
     tags: string[];
     vars: {};
