@@ -18,7 +18,6 @@ declare class Generator implements GeneratorType {
     getInformation(): string;
     getRoot(): string;
     getSrc(): string;
-    getSubTypePath(): string;
     getPath(): string;
     getFilePath(): string;
     deriveTemplateVariables(): TemplateVariablesType;

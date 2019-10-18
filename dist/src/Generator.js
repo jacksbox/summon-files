@@ -64,11 +64,8 @@ var Generator = (function () {
     Generator.prototype.getSrc = function () {
         return this.src ? this.src + "/" : '';
     };
-    Generator.prototype.getSubTypePath = function () {
-        return this.subType ? this.subType + "/" : '';
-    };
     Generator.prototype.getPath = function () {
-        return "" + this.getSrc() + this.getSubTypePath() + this.name;
+        return "" + this.getSrc() + this.name;
     };
     Generator.prototype.getFilePath = function () {
         return "/" + this.getRoot() + this.getPath();

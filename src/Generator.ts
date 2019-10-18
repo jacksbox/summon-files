@@ -91,12 +91,8 @@ class Generator implements GeneratorType{
     return this.src ? `${this.src}/` : ''
   }
 
-  getSubTypePath(): string {
-    return this.subType ? `${this.subType}/` : ''
-  }
-
   getPath(): string {
-    return `${this.getSrc()}${this.getSubTypePath()}${this.name}`
+    return `${this.getSrc()}${this.name}`
   }
 
   getFilePath(): string {
