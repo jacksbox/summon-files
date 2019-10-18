@@ -5,7 +5,7 @@ import React from 'react'
 import './{{name}}.css'
 {{/if}}
 
-// use custom variable e.g. demoCutomVariable: "{{demoCutomVariable}}" defined in the options.json
+// use custom variable e.g. demoCutomVariable: "{{demoCutomVariable}}" defined in the config.json
 
 {{#if subType }}
 // use a subType for further specialisation of the file
