@@ -1,15 +1,17 @@
 "use strict";
 var fs = require('fs');
 var OPTIONS_DIR = require('./consts').OPTIONS_DIR;
-var BASE_CONFIG_PATH = "" + process.cwd() + OPTIONS_DIR + "/options.json";
-var loadOptions = function () {
+var getConfigPath = function (configDir) { return process.cwd() + "/" + configDir; };
+var loadOptions = function (command) {
     var options = null;
+    var configDir = command.args.configDir ? getConfigPath(command.args.configDir) : getConfigPath(OPTIONS_DIR);
     try {
-        if (fs.existsSync(BASE_CONFIG_PATH)) {
-            options = JSON.parse(fs.readFileSync(BASE_CONFIG_PATH));
+        if (fs.existsSync(configDir)) {
+            options = JSON.parse(fs.readFileSync(configDir + "/config.json"));
+            options.configDir = configDir;
         }
         else {
-            throw new Error("No config file found at " + BASE_CONFIG_PATH);
+            throw new Error("No config file found at " + configDir);
         }
     }
     catch (error) {
@@ -21,6 +23,7 @@ var loadOptions = function () {
 var deriveConfig = function (options, generator) {
     var generatorOption = options.types.find(function (option) { return option.type === generator; });
     var config = {
+        configDir: options.configDir,
         root: options.root,
         type: generatorOption.type,
         desc: generatorOption.desc || null,

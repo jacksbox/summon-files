@@ -1,7 +1,7 @@
-const OPTIONS_DIR: string = '/.summon'
+const OPTIONS_DIR: string = '.summon'
 
 const USAGE_OUTPUT: string =
-`usage: yarn summon <type> <name> [-s <subType>] [-l] [-i] [-f]
+`usage: yarn summon <type> <name> [-s <subType>] [-l] [-i] [-f] [-c <configPath>]
 
 type \t genarator type
      \t    (use 'yarn summon -l' to output a list of all available types)
@@ -14,6 +14,7 @@ name \t will be used as file / component / class / etc. name
 -l   \t output a list of all available generator types
 -i   \t output information for the generator type
      \t     (<type> must be specified)
+-c   \t relative path to the config directory
 
 
 'yarn summon help' prints usage information

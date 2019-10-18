@@ -11,6 +11,7 @@ const parseArguments = (argv): ArgsType =>
   args.printInformation = argv.i || null
   args.listGenerators = argv.l || null
   args.force = argv.f || null
+  args.configDir = argv.c || null
   return args
 }
 

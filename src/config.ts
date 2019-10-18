@@ -2,17 +2,20 @@ const fs = require('fs')
 
 const { OPTIONS_DIR } = require('./consts')
 
-import { OptionsType, ConfigType } from './types'
+import { OptionsType, ConfigType, CommandType } from './types'
 
-const BASE_CONFIG_PATH: string = `${process.cwd()}${OPTIONS_DIR}/config.json`
+const getConfigPath: (configDir: string) => string = configDir => `${process.cwd()}/${configDir}`
 
-const loadOptions = (): OptionsType => {
+const loadOptions = (command: CommandType): OptionsType => {
   let options = null
+
+  const configDir = command.args.configDir ? getConfigPath(command.args.configDir) : getConfigPath(OPTIONS_DIR)
   try {
-    if (fs.existsSync(BASE_CONFIG_PATH)) {
-      options = JSON.parse(fs.readFileSync(BASE_CONFIG_PATH))
+    if (fs.existsSync(configDir)) {
+      options = JSON.parse(fs.readFileSync(`${configDir}/config.json`))
+      options.configDir = configDir
     } else {
-        throw new Error(`No config file found at ${BASE_CONFIG_PATH}`)
+        throw new Error(`No config file found at ${configDir}`)
     }
   } catch (error) {
     console.log('\x1b[31m%s\x1b[0m', error.message)
@@ -25,6 +28,7 @@ const deriveConfig = (options: OptionsType, generator: string): ConfigType => {
     const generatorOption = options.types.find(option => option.type === generator)
 
     const config: ConfigType = {
+      configDir: options.configDir,
       root: options.root,
       type: generatorOption.type,
       desc: generatorOption.desc || null,

@@ -7,6 +7,7 @@ var parseArguments = function (argv) {
     args.printInformation = argv.i || null;
     args.listGenerators = argv.l || null;
     args.force = argv.f || null;
+    args.configDir = argv.c || null;
     return args;
 };
 var parseCommand = function () {

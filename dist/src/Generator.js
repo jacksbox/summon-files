@@ -15,6 +15,7 @@ var handlebars = require('handlebars');
 var helpers = require('handlebars-helpers');
 var mkdirp = require('mkdirp');
 var OPTIONS_DIR = require('./consts').OPTIONS_DIR;
+var getConfigPath = function (configDir) { return process.cwd() + "/" + configDir + "/config.json"; };
 helpers();
 var _a = require('./utils'), lc = _a.lc, uc = _a.uc, lcFirst = _a.lcFirst, ucFirst = _a.ucFirst;
 var getInformationString = function (type, desc, availableSubTypes) {
@@ -27,6 +28,7 @@ var Generator = (function () {
         this.tags = [];
         this.vars = {};
         this.subType = null;
+        this.configDir = config.configDir;
         this.name = command.name;
         this.args = command.args;
         this.type = config.type;
@@ -74,7 +76,7 @@ var Generator = (function () {
         return __assign({ name: this.name, name_lower: lc(this.name), name_upper: uc(this.name), name_lcFirst: lcFirst(this.name), name_ucFirst: ucFirst(this.name), path: this.getFilePath(), type: this.type, subType: this.subType, tags: this.tags }, this.vars);
     };
     Generator.prototype.loadTemplate = function (filename) {
-        var path = "" + process.cwd() + OPTIONS_DIR + "/templates/" + filename;
+        var path = this.configDir + "/templates/" + filename;
         var source = null;
         try {
             source = fs.readFileSync(path, 'utf-8');

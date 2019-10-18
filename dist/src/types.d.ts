@@ -3,6 +3,7 @@ export interface ArgsType {
     printInformation?: boolean;
     listGenerators?: boolean;
     force?: boolean;
+    configDir?: string;
 }
 export interface CommandType {
     generator: string;
@@ -21,8 +22,10 @@ export interface TypeType {
 export interface OptionsType {
     root?: string;
     types: TypeType[];
+    configDir: string;
 }
 export interface ConfigType {
+    configDir: string;
     root: string;
     type: string;
     desc: string;

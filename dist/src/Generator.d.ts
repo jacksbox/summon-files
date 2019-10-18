@@ -1,5 +1,6 @@
 import { CommandType, ConfigType, ArgsType, TemplateVariablesType, GeneratorType } from './types';
 declare class Generator implements GeneratorType {
+    configDir: string;
     name: string;
     type: string;
     desc: string;

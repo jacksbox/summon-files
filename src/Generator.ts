@@ -5,6 +5,8 @@ const mkdirp = require('mkdirp');
 
 const { OPTIONS_DIR } = require('./consts')
 
+const getConfigPath: (configDir: string) => string = configDir => `${process.cwd()}/${configDir}/config.json`
+
 helpers()
 
 const {
@@ -29,6 +31,8 @@ subTypes \t${availableSubTypes.length > 0 ? availableSubTypes.join('|') : 'none'
 `
 
 class Generator implements GeneratorType{
+  configDir: string
+
   name: string
   type: string
   desc: string
@@ -45,6 +49,7 @@ class Generator implements GeneratorType{
   availableSubTypes: string[]
 
   constructor(command: CommandType, config: ConfigType) {
+    this.configDir = config.configDir
     this.name = command.name
     this.args = command.args
 
@@ -115,7 +120,7 @@ class Generator implements GeneratorType{
   }
 
   loadTemplate(filename: string): string {
-    const path: string = `${process.cwd()}${OPTIONS_DIR}/templates/${filename}`;
+    const path: string = `${this.configDir}/templates/${filename}`;
     let source: string = null
     try {
       source = fs.readFileSync(path, 'utf-8')

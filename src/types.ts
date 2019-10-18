@@ -2,7 +2,8 @@ export interface ArgsType {
   subType?: string,
   printInformation?: boolean,
   listGenerators?: boolean,
-  force?: boolean
+  force?: boolean,
+  configDir?: string
 }
 
 export interface CommandType {
@@ -23,10 +24,12 @@ export interface TypeType {
 
 export interface OptionsType {
   root?: string,
-  types: TypeType[]
+  types: TypeType[],
+  configDir: string
 }
 
 export interface ConfigType {
+  configDir: string,
   root: string,
   type: string,
   desc: string,
