@@ -1,20 +1,14 @@
-const fs = require('fs')
-const handlebars = require('handlebars')
-const helpers = require('handlebars-helpers')
-const mkdirp = require('mkdirp');
+import fs from 'fs'
+import handlebars from 'handlebars'
+import helpers from 'handlebars-helpers'
+import mkdirp from 'mkdirp'
 
-const { OPTIONS_DIR } = require('./consts')
-
-const getConfigPath: (configDir: string) => string = configDir => `${process.cwd()}/${configDir}/config.json`
-
-helpers()
-
-const {
+import {
   lc,
   uc,
   lcFirst,
   ucFirst
-} = require('./utils')
+} from './utils'
 
 import {
   CommandType,
@@ -24,6 +18,8 @@ import {
   GeneratorType,
   renderType
 } from './types'
+
+helpers()
 
 const getInformationString = (type: string, desc: string, availableSubTypes: string[]): string =>
 `type    \t${type}${desc ? `\n\t\t${desc}` : ''}
@@ -38,8 +34,8 @@ class Generator implements GeneratorType{
   desc: string
   args: ArgsType
 
-  root: string = ''
-  src: string = ''
+  root = ''
+  src = ''
   files: any[]
   tags: string[] = []
   vars: any = {}
@@ -82,11 +78,11 @@ class Generator implements GeneratorType{
       this.subTypeMap.forEach(types  => {
         console.log(types)
         if (Array.isArray(types) && types.includes(s)) {
-          subType = types[0]
+          [subType] = types
           return
-        } else if (types === s) {
+        }
+        if (types === s) {
           subType = types
-          return
         }
       })
       console.log(subType)
@@ -136,7 +132,7 @@ class Generator implements GeneratorType{
   }
 
   loadTemplate(filename: string): string {
-    const path: string = `${this.configDir}/templates/${filename}`;
+    const path = `${this.configDir}/templates/${filename}`;
     let source: string = null
     try {
       source = fs.readFileSync(path, 'utf-8')
@@ -153,7 +149,7 @@ class Generator implements GeneratorType{
 
     const renderPath: renderType = handlebars.compile(target);
     const relPath: string = renderPath(templateVars);
-    const absPath: string = `${process.cwd()}${relPath}`
+    const absPath = `${process.cwd()}${relPath}`
 
     const source: string = this.loadTemplate(template)
     const renderFile: renderType = handlebars.compile(source);
