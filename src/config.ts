@@ -14,7 +14,7 @@ export const loadOptions = (command: CommandType): OptionsType => {
     : getConfigPath(OPTIONS_DIR)
   try {
     if (fs.existsSync(configDir)) {
-      options = JSON.parse(fs.readFileSync(`${configDir}/config.json`))
+      options = JSON.parse(fs.readFileSync(`${configDir}/config.json`, 'utf8'))
       options.configDir = configDir
     } else {
       throw new Error(`No config file found at ${configDir}`)
