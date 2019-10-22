@@ -8,6 +8,7 @@
       "removeComments": true,
       "typeRoots": ["node_modules/@types", "src/types.ts"],
       "declaration": true,
+      "esModuleInterop": true
   },
   "include": [
     "index.ts",
