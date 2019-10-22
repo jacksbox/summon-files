@@ -1,8 +1,8 @@
-const parseCommand = require('./cli')
-const { loadOptions, deriveConfig } = require('./config')
-const Generator = require('./Generator')
+import parseCommand from'./cli'
+import { loadOptions, deriveConfig } from './config'
+import Generator from'./Generator'
 
-const { USAGE_OUTPUT } = require('./consts')
+import { USAGE_OUTPUT } from'./consts'
 
 import {
   CommandType,
@@ -14,11 +14,11 @@ import {
 const listGenerators = options =>
 `Available generator Types [available subTypes]:
 ${options.types.map(t => {
-  const subTypesStr = t.subTypes ? `\n    [${t.subTypes.map(t => {
-    if(Array.isArray(t)) {
-      return t[0]
+  const subTypesStr = t.subTypes ? `\n    [${t.subTypes.map((sT: string | string[]) => {
+    if(Array.isArray(sT)) {
+      return sT[0]
     }
-    return t
+    return sT
   }).join('|')}]` : ''
   return `  ${t.type}${subTypesStr}`
 }).join('\n')}
@@ -34,7 +34,7 @@ const summon = (): boolean => {
   }
 
   if (!options.types.find(t => t.type === command.generator)) {
-    const output: string = `type '${command.generator}' does not exist`
+    const output = `type '${command.generator}' does not exist`
     console.log('\x1b[31mError:\x1b[0m %s\n', output)
     console.log(USAGE_OUTPUT)
     process.exit()

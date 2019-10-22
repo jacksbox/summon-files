@@ -3,12 +3,7 @@ import handlebars from 'handlebars'
 import helpers from 'handlebars-helpers'
 import mkdirp from 'mkdirp'
 
-import {
-  lc,
-  uc,
-  lcFirst,
-  ucFirst
-} from './utils'
+import { lc, uc, lcFirst, ucFirst } from './utils'
 
 import {
   CommandType,
@@ -21,12 +16,13 @@ import {
 
 helpers()
 
+// prettier-ignore
 const getInformationString = (type: string, desc: string, availableSubTypes: string[]): string =>
 `type    \t${type}${desc ? `\n\t\t${desc}` : ''}
 subTypes \t${availableSubTypes.length > 0 ? availableSubTypes.join('|') : 'none'}
 `
 
-class Generator implements GeneratorType{
+class Generator implements GeneratorType {
   configDir: string
 
   name: string
@@ -75,10 +71,10 @@ class Generator implements GeneratorType{
 
     try {
       let subType = null
-      this.subTypeMap.forEach(types  => {
+      this.subTypeMap.forEach(types => {
         console.log(types)
         if (Array.isArray(types) && types.includes(s)) {
-          [subType] = types
+          ;[subType] = types
           return
         }
         if (types === s) {
@@ -87,7 +83,7 @@ class Generator implements GeneratorType{
       })
       console.log(subType)
       return subType
-    } catch(err) {
+    } catch (err) {
       throw new Error(`-s must be one of ${this.availableSubTypes.join('|')} instead got ${s}`)
     }
   }
@@ -132,11 +128,11 @@ class Generator implements GeneratorType{
   }
 
   loadTemplate(filename: string): string {
-    const path = `${this.configDir}/templates/${filename}`;
+    const path = `${this.configDir}/templates/${filename}`
     let source: string = null
     try {
       source = fs.readFileSync(path, 'utf-8')
-    } catch(error) {
+    } catch (error) {
       console.log('\x1b[31m%s\x1b[0m', error.message)
       process.exit()
     }
@@ -147,34 +143,37 @@ class Generator implements GeneratorType{
   renderTemplate(tag: string, templateVars: TemplateVariablesType): void {
     const { template, target } = this.files.find(({ tag: ownTag }) => ownTag === tag)
 
-    const renderPath: renderType = handlebars.compile(target);
-    const relPath: string = renderPath(templateVars);
+    const renderPath: renderType = handlebars.compile(target)
+    const relPath: string = renderPath(templateVars)
     const absPath = `${process.cwd()}${relPath}`
 
     const source: string = this.loadTemplate(template)
-    const renderFile: renderType = handlebars.compile(source);
-    const content: string = renderFile(templateVars);
+    const renderFile: renderType = handlebars.compile(source)
+    const content: string = renderFile(templateVars)
 
     try {
-      const dir: string = absPath.split('/').slice(0, -1).join('/')
+      const dir: string = absPath
+        .split('/')
+        .slice(0, -1)
+        .join('/')
       mkdirp.sync(dir)
-    } catch(error) {
+    } catch (error) {
       console.log('\x1b[31m%s\x1b[0m', error.message)
       process.exit()
     }
 
-    if(!this.args.force && fs.existsSync(absPath)) {
+    if (!this.args.force && fs.existsSync(absPath)) {
       console.log('%s\x1b[33m%s\x1b[0m%s', `${tag}\t\t`, ' already exists at', `\t ${relPath}`)
       return
     }
 
     try {
-      const stream = fs.createWriteStream(absPath);
+      const stream = fs.createWriteStream(absPath)
       stream.once('open', function() {
         stream.write(content)
         stream.end()
       })
-    } catch(error) {
+    } catch (error) {
       console.log('\x1b[31m%s\x1b[0m', error.message)
       process.exit()
     }

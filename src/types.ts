@@ -1,42 +1,42 @@
 export interface ArgsType {
-  subType?: string,
-  printInformation?: boolean,
-  listGenerators?: boolean,
-  force?: boolean,
+  subType?: string
+  printInformation?: boolean
+  listGenerators?: boolean
+  force?: boolean
   configDir?: string
 }
 
 export interface CommandType {
-  generator: string,
-  name: string,
+  generator: string
+  name: string
   args: ArgsType
 }
 
 export interface TypeType {
-  type: string,
-  desc?: string,
-  src?: string,
-  defaultTags?: string[],
+  type: string
+  desc?: string
+  src?: string
+  defaultTags?: string[]
   defaultVars?: {}
-  subTypes?: any[],
-  files: any[],
+  subTypes?: any[]
+  files: any[]
 }
 
 export interface OptionsType {
-  root?: string,
-  types: TypeType[],
+  root?: string
+  types: TypeType[]
   configDir: string
 }
 
 export interface ConfigType {
-  configDir: string,
-  root: string,
-  type: string,
-  desc: string,
-  src: string,
-  subTypes: any[],
-  files: any[],
-  tags: string[],
+  configDir: string
+  root: string
+  type: string
+  desc: string
+  src: string
+  subTypes: any[]
+  files: any[]
+  tags: string[]
   vars: {}
 }
 
@@ -45,13 +45,13 @@ export type StringModifyerType = (string) => string
 export type renderType = (templateVars: TemplateVariablesType) => string
 
 export interface TemplateVariablesType {
-  name: string,
-  name_lower: string,
-  name_upper: string,
-  name_lcFirst: string,
-  name_ucFirst: string,
-  path: string,
-  subType: string,
+  name: string
+  name_lower: string
+  name_upper: string
+  name_lcFirst: string
+  name_ucFirst: string
+  path: string
+  subType: string
   [key: string]: string
 }
 

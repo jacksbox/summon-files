@@ -1,6 +1,6 @@
-const minimist = require('minimist')
+import minimist from 'minimist'
 
-const { USAGE_OUTPUT } = require('./consts')
+import { USAGE_OUTPUT } from './consts'
 
 import { CommandType, ArgsType } from './types'
 
@@ -32,7 +32,7 @@ const parseCommand = (): CommandType => {
   }
 
   if (argv._.length !== 2 && !typoInformationCommand && !listGeneratorsCommand) {
-    const output: string = `wrong number of arguments`
+    const output = `wrong number of arguments`
     console.log('\x1b[31mError:\x1b[0m %s\n', output)
     console.log(USAGE_OUTPUT)
     process.exit()

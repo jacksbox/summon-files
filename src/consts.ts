@@ -1,6 +1,7 @@
-const OPTIONS_DIR: string = '.summon'
+export const OPTIONS_DIR = '.summon'
 
-const USAGE_OUTPUT: string =
+// prettier-ignore
+export const USAGE_OUTPUT =
 `usage: yarn summon <type> <name> [-s <subType>] [-l] [-i] [-f] [-c <configPath>]
 
 type \t genarator type
@@ -19,8 +20,3 @@ name \t will be used as file / component / class / etc. name
 
 'yarn summon help' prints usage information
 `
-
-export = {
-  OPTIONS_DIR,
-  USAGE_OUTPUT
-}
