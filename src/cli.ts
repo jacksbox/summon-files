@@ -4,8 +4,7 @@ const { USAGE_OUTPUT } = require('./consts')
 
 import { CommandType, ArgsType } from './types'
 
-const parseArguments = (argv): ArgsType =>
-{
+const parseArguments = (argv): ArgsType => {
   const args: ArgsType = {}
   args.subType = argv.s || null
   args.printInformation = argv.i || null
