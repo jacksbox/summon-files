@@ -1,6 +1,9 @@
 "use strict";
-var minimist = require('minimist');
-var USAGE_OUTPUT = require('./consts').USAGE_OUTPUT;
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+var minimist_1 = __importDefault(require("minimist"));
+var consts_1 = require("./consts");
 var parseArguments = function (argv) {
     var args = {};
     args.subType = argv.s || null;
@@ -11,9 +14,9 @@ var parseArguments = function (argv) {
     return args;
 };
 var parseCommand = function () {
-    var argv = minimist(process.argv.slice(2));
+    var argv = minimist_1["default"](process.argv.slice(2));
     if (argv._.length === 1 && argv._[0] === 'help') {
-        console.log(USAGE_OUTPUT);
+        console.log(consts_1.USAGE_OUTPUT);
         process.exit();
     }
     var typoInformationCommand = false;
@@ -27,7 +30,7 @@ var parseCommand = function () {
     if (argv._.length !== 2 && !typoInformationCommand && !listGeneratorsCommand) {
         var output = "wrong number of arguments";
         console.log('\x1b[31mError:\x1b[0m %s\n', output);
-        console.log(USAGE_OUTPUT);
+        console.log(consts_1.USAGE_OUTPUT);
         process.exit();
     }
     var command = {

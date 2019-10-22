@@ -1,13 +1,19 @@
 "use strict";
-var fs = require('fs');
-var OPTIONS_DIR = require('./consts').OPTIONS_DIR;
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+exports.__esModule = true;
+var fs_1 = __importDefault(require("fs"));
+var consts_1 = require("./consts");
 var getConfigPath = function (configDir) { return process.cwd() + "/" + configDir; };
-var loadOptions = function (command) {
+exports.loadOptions = function (command) {
     var options = null;
-    var configDir = command.args.configDir ? getConfigPath(command.args.configDir) : getConfigPath(OPTIONS_DIR);
+    var configDir = command.args.configDir
+        ? getConfigPath(command.args.configDir)
+        : getConfigPath(consts_1.OPTIONS_DIR);
     try {
-        if (fs.existsSync(configDir)) {
-            options = JSON.parse(fs.readFileSync(configDir + "/config.json"));
+        if (fs_1["default"].existsSync(configDir)) {
+            options = JSON.parse(fs_1["default"].readFileSync(configDir + "/config.json", 'utf8'));
             options.configDir = configDir;
         }
         else {
@@ -20,7 +26,7 @@ var loadOptions = function (command) {
     }
     return options;
 };
-var deriveConfig = function (options, generator) {
+exports.deriveConfig = function (options, generator) {
     var generatorOption = options.types.find(function (option) { return option.type === generator; });
     var config = {
         configDir: options.configDir,
@@ -35,4 +41,3 @@ var deriveConfig = function (options, generator) {
     };
     return config;
 };
-module.exports = { loadOptions: loadOptions, deriveConfig: deriveConfig };

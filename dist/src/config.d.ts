@@ -1,6 +1,3 @@
 import { OptionsType, ConfigType, CommandType } from './types';
-declare const _default: {
-    loadOptions: (command: CommandType) => OptionsType;
-    deriveConfig: (options: OptionsType, generator: string) => ConfigType;
-};
-export = _default;
+export declare const loadOptions: (command: CommandType) => OptionsType;
+export declare const deriveConfig: (options: OptionsType, generator: string) => ConfigType;

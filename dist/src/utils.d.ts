@@ -1,8 +1,5 @@
 import { StringModifyerType } from './types';
-declare const _default: {
-    lcFirst: StringModifyerType;
-    ucFirst: StringModifyerType;
-    lc: StringModifyerType;
-    uc: StringModifyerType;
-};
-export = _default;
+export declare const lcFirst: StringModifyerType;
+export declare const ucFirst: StringModifyerType;
+export declare const lc: StringModifyerType;
+export declare const uc: StringModifyerType;

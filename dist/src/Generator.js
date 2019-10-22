@@ -10,14 +10,15 @@ var __assign = (this && this.__assign) || function () {
     };
     return __assign.apply(this, arguments);
 };
-var fs = require('fs');
-var handlebars = require('handlebars');
-var helpers = require('handlebars-helpers');
-var mkdirp = require('mkdirp');
-var OPTIONS_DIR = require('./consts').OPTIONS_DIR;
-var getConfigPath = function (configDir) { return process.cwd() + "/" + configDir + "/config.json"; };
-helpers();
-var _a = require('./utils'), lc = _a.lc, uc = _a.uc, lcFirst = _a.lcFirst, ucFirst = _a.ucFirst;
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+var fs_1 = __importDefault(require("fs"));
+var handlebars_1 = __importDefault(require("handlebars"));
+var handlebars_helpers_1 = __importDefault(require("handlebars-helpers"));
+var mkdirp_1 = __importDefault(require("mkdirp"));
+var utils_1 = require("./utils");
+handlebars_helpers_1["default"]();
 var getInformationString = function (type, desc, availableSubTypes) {
     return "type    \t" + type + (desc ? "\n\t\t" + desc : '') + "\nsubTypes \t" + (availableSubTypes.length > 0 ? availableSubTypes.join('|') : 'none') + "\n";
 };
@@ -56,12 +57,12 @@ var Generator = (function () {
             this.subTypeMap.forEach(function (types) {
                 console.log(types);
                 if (Array.isArray(types) && types.includes(s)) {
+                    ;
                     subType_1 = types[0];
                     return;
                 }
-                else if (types === s) {
+                if (types === s) {
                     subType_1 = types;
-                    return;
                 }
             });
             console.log(subType_1);
@@ -90,13 +91,13 @@ var Generator = (function () {
         return "/" + this.getRoot() + this.getPath();
     };
     Generator.prototype.deriveTemplateVariables = function () {
-        return __assign({ name: this.name, name_lower: lc(this.name), name_upper: uc(this.name), name_lcFirst: lcFirst(this.name), name_ucFirst: ucFirst(this.name), path: this.getFilePath(), type: this.type, subType: this.subType, tags: this.tags }, this.vars);
+        return __assign({ name: this.name, name_lower: utils_1.lc(this.name), name_upper: utils_1.uc(this.name), name_lcFirst: utils_1.lcFirst(this.name), name_ucFirst: utils_1.ucFirst(this.name), path: this.getFilePath(), type: this.type, subType: this.subType, tags: this.tags }, this.vars);
     };
     Generator.prototype.loadTemplate = function (filename) {
         var path = this.configDir + "/templates/" + filename;
         var source = null;
         try {
-            source = fs.readFileSync(path, 'utf-8');
+            source = fs_1["default"].readFileSync(path, 'utf-8');
         }
         catch (error) {
             console.log('\x1b[31m%s\x1b[0m', error.message);
@@ -109,26 +110,29 @@ var Generator = (function () {
             var ownTag = _a.tag;
             return ownTag === tag;
         }), template = _a.template, target = _a.target;
-        var renderPath = handlebars.compile(target);
+        var renderPath = handlebars_1["default"].compile(target);
         var relPath = renderPath(templateVars);
         var absPath = "" + process.cwd() + relPath;
         var source = this.loadTemplate(template);
-        var renderFile = handlebars.compile(source);
+        var renderFile = handlebars_1["default"].compile(source);
         var content = renderFile(templateVars);
         try {
-            var dir = absPath.split('/').slice(0, -1).join('/');
-            mkdirp.sync(dir);
+            var dir = absPath
+                .split('/')
+                .slice(0, -1)
+                .join('/');
+            mkdirp_1["default"].sync(dir);
         }
         catch (error) {
             console.log('\x1b[31m%s\x1b[0m', error.message);
             process.exit();
         }
-        if (!this.args.force && fs.existsSync(absPath)) {
+        if (!this.args.force && fs_1["default"].existsSync(absPath)) {
             console.log('%s\x1b[33m%s\x1b[0m%s', tag + "\t\t", ' already exists at', "\t " + relPath);
             return;
         }
         try {
-            var stream_1 = fs.createWriteStream(absPath);
+            var stream_1 = fs_1["default"].createWriteStream(absPath);
             stream_1.once('open', function () {
                 stream_1.write(content);
                 stream_1.end();
